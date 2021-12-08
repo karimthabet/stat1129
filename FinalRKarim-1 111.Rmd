@@ -1,0 +1,74 @@
+---
+title: "Homework 6"
+output: html_notebook
+author: "Karim Thabet"
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+# Question 1
+
+# Matrix 1 input
+matr1 = matrix(c(7,9,12,2,4,13), nrow=2, ncol=3 ,byrow=TRUE)
+
+#Matrix 2 input
+matr2 = matrix(c(1,7,12,19,2,8,13,20,3,9,14,21) , nrow=3 ,ncol=4 ,byrow = TRUE)
+
+#printing matrix as a sanity check
+print("First Matrix")
+print(matr1)
+print("Second Matrix")
+print(matr2)
+
+
+#Multiplyiing matrices
+result <- matr1 %*% matr2
+
+
+#Printing final result
+print("Resulting Matrix")
+print(result)
+```
+
+
+```{r}
+#Question 2
+
+#Reading in Data
+data <- read.csv("Amazon.csv")
+
+data$Total.charged = as.numeric(gsub("\\$", "", data$Total.charged))
+
+print("total spent on amazon in period =")
+print(sum(data$Total.charged))
+print("average order spent on amazon in period =")
+print(mean(data$Total.charged))
+print("Most Expensive order spent on amazon in period =")
+print(max(data$Total.charged))
+
+# Grouping data by month in order to plot monthly spending
+
+#Setting date as datetime variable not string
+data$Order.Date = as.Date(data$Order.Date, "%m/%d/%Y")
+
+
+# summing and grouping expense by month
+monthlyspend <- aggregate(cbind(Total.charged)~month(data$Order.Date),
+                     data=data,FUN=sum)
+
+#Plotting
+barplot(monthlyspend$Total.charged, names.arg = monthlyspend$`month(data$Order.Date)`)
+
+
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
