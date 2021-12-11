@@ -16,4 +16,21 @@ Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by press
 When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
 
 The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+```{r}
+HW 7
+id<-c(1,2,3,4,5)
+name<-c("peter","Amy","Ryan","Gary","michelle")
+salary<-c(623.30,515.20,611.00,729.00,843.25)
+df<-data.frame(id,name,salary)
+df$department<-c("Art","Economics","computer science","Mathematics","French")
+df[c(1,3,5),c(2,3)]
+x<-df[c(1,4,5),"salary"]
+x
+barplot(x,names.arg = c("peter","Gary","michelle"))
+x<-c(843.25,515.20,623.30)
+mylabel<-c("highest","lowest","median")
+colors<-c("red","green","blue")
+pie(x, label=mylabel, main = "SALARIES")
+
+```
 
